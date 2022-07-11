@@ -2,6 +2,8 @@ var lower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"
 var upper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var numbers = ["0","1","2","3","4","5","6","7","8","9"];
 var symbols = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+"];
+// Array containing user selections
+var selectedCharacters = [];
 // Object containing all potential characters
 const characters = {
   lower: ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
@@ -19,22 +21,21 @@ var lowerPrompt = "";
 var upperPrompt = "";
 var numbersPrompt = "";
 var symbolsPrompt = "";
-// var generateBtn = document.querySelector("#generate");
-// var passwordText = document.getElementById("password");
 
-// (**Starter Code**) Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword); - ** IS THIS NEEDED???
+
 document.getElementById("generate").addEventListener("click", paramPrompts);
 
   function paramPrompts() {
-    passwordLength = Number(prompt("Enter a password length between 4 and 128"));
+    passwordLength = Number(prompt("Enter a password length between 8 and 128"));
     console.log(passwordLength);
     // If user presses cancel, function ends
-    if (!passwordLength) {
+    if (!passwordLength || passwordLength < 8) {
+      alert("Password length must be a numerical number between 8 and 128");
       return;
     }
     var lowerPrompt = prompt("Enter Y to include lowercase letters", "Y");
     if (lowerPrompt === "Y") {
+      // Pushes user selections into the selectedCharacters array
       selectedCharacters.push(...lower)
       console.log(selectedCharacters);
     }
@@ -69,48 +70,32 @@ document.getElementById("generate").addEventListener("click", paramPrompts);
       symbolsPrompt = false;
       console.log("symbols not included");
     }
+    if (lowerPrompt === false && upperPrompt === false && numbersPrompt === false && symbolsPrompt === false) {
+    alert("At least one character type must be selected");
+    return;
+    }
+    outputPassword();
   }
 
-  var selectedCharacters = []
-
   function createPassword() {
-    password += selectedCharacters(Math.floor(Math.random() * selectedCharacters.length));
     for (var i = 0; i < passwordLength; i++) {
+      password += selectedCharacters[(Math.floor(Math.random() * selectedCharacters.length))];
     }
+    return password;
   }
 
   function outputPassword() {
     password = createPassword();
     var passwordText = document.getElementById("password");
 
-    passwordText = password; 
-    
+    passwordText.value = password;
+
   }
 
-// generatePassword();
 
-  // document.getElementById("#password");
 
-  // return ("#password");
 
-  // getParams.paramPrompts();
-  // const writePassword = {
-    // if (getParams.paramPrompts.inclLower === !false) {
-    // inclLower = Math.floor(Math.random() * lower.length);
-    // console.log(lower[inclLower]);
-    // }
-    // if (getParams.paramPrompts.incUpper === !false) {
-    // inclUpper = Math.floor(Math.random() * upper.length);
-    // console.log(upper[inclUpper]);
-    // }
-    // if (getParams.paramPrompts.inclNumbers === !false) {
-    // inclNumbers = Math.floor(Math.random() * numbers.length);
-    // console.log(numbers[inclNumbers]);
-    // }
-    // if (getParams.paramPrompts.inclSymbols === !false) {
-    // inclSymbols = Math.floor(Math.random() * symbols.length);
-    // console.log(symbols[inclSymbols]);
-    // }
+
 
 
 
