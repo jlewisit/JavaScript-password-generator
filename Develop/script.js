@@ -14,6 +14,7 @@ var inclUpper = document.getElementById("inclUpper");
 var inclNumbers = document.getElementById("inclNumbers");
 var inclSymbols = document.getElementById("inclSymbols");
 var passwordLength = document.getElementById("passwordLength");
+var password = "";
 var lowerPrompt = "";
 var upperPrompt = "";
 var numbersPrompt = "";
@@ -23,10 +24,9 @@ var symbolsPrompt = "";
 
 // (**Starter Code**) Add event listener to generate button
 // generateBtn.addEventListener("click", writePassword); - ** IS THIS NEEDED???
-document.getElementById("generate").addEventListener("click", getParams.paramPrompts);
+document.getElementById("generate").addEventListener("click", paramPrompts);
 
-var getParams = {
-  paramPrompts: function() {
+  function paramPrompts() {
     passwordLength = Number(prompt("Enter a password length between 4 and 128"));
     console.log(passwordLength);
     // If user presses cancel, function ends
@@ -34,122 +34,83 @@ var getParams = {
       return;
     }
     var lowerPrompt = prompt("Enter Y to include lowercase letters", "Y");
-    if (lowerPrompt === "Y", lowerPrompt === true) {
-      console.log("lowercase letters included");
+    if (lowerPrompt === "Y") {
+      selectedCharacters.push(...lower)
+      console.log(selectedCharacters);
     }
     else {
       lowerPrompt = false;
       console.log("lowercase letters not included");
     }
     var upperPrompt = prompt("Enter Y to include uppercase letters", "Y");
-    if (upperPrompt === "Y", upperPrompt === true) {
-      console.log("uppercase letters included");
+    if (upperPrompt === "Y") {
+      selectedCharacters.push(...upper)
+      console.log(selectedCharacters);
     }
     else {
       upperPrompt = false;
       console.log("uppercase letters not included");
     }
     var numbersPrompt = prompt("Enter Y to include numbers", "Y");
-    if (numbersPrompt === "Y", numbersPrompt === true) {
-      console.log("numbers included");
+    if (numbersPrompt === "Y") {
+      selectedCharacters.push(...numbers)
+      console.log(selectedCharacters);
     }
     else {
       numbersPrompt = false;
       console.log("numbers not included");
     }
     var symbolsPrompt = prompt("Enter Y to include symbols", "Y");
-    if (symbolsPrompt === "Y", symbolsPrompt === true) {
-      console.log("symbols included");
+    if (symbolsPrompt === "Y") {
+      selectedCharacters.push(...symbols)
+      console.log(selectedCharacters);
     }
     else {
       symbolsPrompt = false;
       console.log("symbols not included");
     }
   }
-}
 
-function writePassword() {
-// getParams.paramPrompts();
-  // const writePassword = {
-    if (getParams.paramPrompts.inclLower === !false) {
-    inclLower = Math.floor(Math.random() * lower.length);
-    console.log(lower[inclLower]);
-    }
-    if (getParams.paramPrompts.incUpper === !false) {
-    inclUpper = Math.floor(Math.random() * upper.length);
-    console.log(upper[inclUpper]);
-    }
-    if (getParams.paramPrompts.inclNumbers === !false) {
-    inclNumbers = Math.floor(Math.random() * numbers.length);
-    console.log(numbers[inclNumbers]);
-    }
-    if (getParams.paramPrompts.inclSymbols === !false) {
-    inclSymbols = Math.floor(Math.random() * symbols.length);
-    console.log(symbols[inclSymbols]);
-    }
+  var selectedCharacters = []
+
+  function createPassword() {
+    password += selectedCharacters(Math.floor(Math.random() * selectedCharacters.length));
     for (var i = 0; i < passwordLength; i++) {
-      password += writePassword(Math.floor(Math.random() * characters.length));
     }
   }
 
-    // else if (lowerPrompt === false, upperPrompt === true, numbersPrompt === true, symbolsPrompt === true) {
-    //   inclUpper = Math.floor(Math.random() * upper.length);
-    //   console.log(upper[inclUpper]);
-    //   inclNumbers = Math.floor(Math.random() * numbers.length);
-    //   console.log(numbers[inclNumbers]);
-    //   inclSymbols = Math.floor(Math.random() * symbols.length);
-    //   console.log(symbols[inclSymbols]);
-    // }
-    // else if (lowerPrompt === true, upperPrompt === false, numbersPrompt === true, symbolsPrompt === true) {
-    //   inclLower = Math.floor(Math.random() * lower.length);
-    //   console.log(lower[inclLower]);
-    //   inclNumbers = Math.floor(Math.random() * numbers.length);
-    //   console.log(numbers[inclNumbers]);
-    //   inclSymbols = Math.floor(Math.random() * symbols.length);
-    //   console.log(symbols[inclSymbols]);
-    // }
+  function outputPassword() {
+    password = createPassword();
+    var passwordText = document.getElementById("password");
 
+    passwordText = password; 
+    
+  }
 
-
-
-  // function writePassword(obtainParameters, passwordLength)
-  // for (var i = 0; i < passwordLength; i++) {
-  //   password += obtainParameters(Math.floor(Math.random() * characters.length));
-  //   // console.log(result);
-  // }
-
-
-
-// // Generate password - NOT WORKING
-//   function writePassword(characters, passwordLength) {
-//     for (var i = 0; i < passwordLength; i++) {
-//     password += Math.floor(Math.random() * characters.length);
-//      console.log(writePassword);
-//     }
-//   }
-// writePassword();
-
-
-//   // Output Password
-//   function generatePassword() {
-//     var pw = writePassword();
-//     var passwordText = document.querySelector("#password");
-
-//     var password = "";
-//     passwordText.value = pw;  
-
-//     console.log(password);
-
-//   }
 // generatePassword();
-
 
   // document.getElementById("#password");
 
   // return ("#password");
 
-
-
+  // getParams.paramPrompts();
+  // const writePassword = {
+    // if (getParams.paramPrompts.inclLower === !false) {
+    // inclLower = Math.floor(Math.random() * lower.length);
+    // console.log(lower[inclLower]);
+    // }
+    // if (getParams.paramPrompts.incUpper === !false) {
+    // inclUpper = Math.floor(Math.random() * upper.length);
+    // console.log(upper[inclUpper]);
+    // }
+    // if (getParams.paramPrompts.inclNumbers === !false) {
+    // inclNumbers = Math.floor(Math.random() * numbers.length);
+    // console.log(numbers[inclNumbers]);
+    // }
+    // if (getParams.paramPrompts.inclSymbols === !false) {
+    // inclSymbols = Math.floor(Math.random() * symbols.length);
+    // console.log(symbols[inclSymbols]);
+    // }
 
 
 
